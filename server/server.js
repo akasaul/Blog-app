@@ -1,8 +1,10 @@
 const express = require('express');
 require('dotenv').config();
+
 const { graphqlHTTP } = require('express-graphql')
 const graphqlSchema = require('./graphql/graphqlSchema');
 const resolvers = require('./graphql/resolvers');
+
 const connectDB = require('./config/DB');
 
 const app = express();
