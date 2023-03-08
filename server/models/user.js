@@ -46,7 +46,15 @@ const userSchema = new Schema({
         }
     ],
     bio: String, 
-    joinedAt: Date.now, 
+
+    joinedAt: {
+        type: String, 
+        default: Date.now()
+    }, 
+
+    profileImg: {
+        type: String
+    }
 });
 
 

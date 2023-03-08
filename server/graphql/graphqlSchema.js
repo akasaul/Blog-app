@@ -13,7 +13,9 @@ module.exports = buildSchema(`
         liked: [Post!]
         followers: [User]!
         bio: String
+        profileImg: String
         joinedAt: String
+        token: String
     }
 
     type Post {
@@ -36,10 +38,11 @@ module.exports = buildSchema(`
     }
 
     type RootMutation {
-        signup(name: String!, email: String!, password: String!, bio: String): User!
+        signup(name: String, email: String, password: String, password2: String, bio: String): User!
     }
 
     schema {
         query: RootQuery
+        mutation: RootMutation
     }
 `)
