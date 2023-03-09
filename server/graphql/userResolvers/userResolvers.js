@@ -98,4 +98,19 @@ module.exports = {
         return {...user._doc, id: user.id.toString(), password: null, token}
     },
 
+    user: async ({id}, req) => {
+        const user = await User.findById(id);
+        
+        if(!user) {
+            const error = new Error('An Error occured');
+            error.data = [{msg: 'User Not Found'}];
+            error.code = 404;
+            throw error;
+        }
+
+        console.log(user);
+
+        return {...user._doc, id: user.id.toString(), password: null}
+    } 
+
 }

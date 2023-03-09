@@ -3,6 +3,9 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
+const authRoutes = require('./routes/authRoutes');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 
 // GraphQL Stuff 
 const { graphqlHTTP } = require('express-graphql')
@@ -37,8 +40,6 @@ const fileFilter = (req, file, cb) => {
     }
 }
 
-// app.use(bodyParser.urlencoded({ extended: false }))
-
 app.use(multer({
     dest: 'profiles', 
     storage,
@@ -59,6 +60,20 @@ app.use('/upload/profile', (req, res, next) => {
     console.log(img.path);
     next();
 })
+
+
+app.use(cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, 
+    keys: ['somerandomcookiekey']
+}))
+
+// initialize passport 
+app.use(passport.initialize());
+app.use(passport.session())
+
+
+// Auth Routes 
+app.use('/auth', authRoutes);
 
 app.use('/graphql', graphqlHTTP({
     schema:  graphqlSchema, 

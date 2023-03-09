@@ -1,5 +1,5 @@
 
-const {signup, login} = require('./userResolvers/userResolvers');
+const {signup, login, user} = require('./userResolvers/userResolvers');
 
 
 module.exports = {
@@ -7,4 +7,6 @@ module.exports = {
     signup,
 
     login,
+
+    user
 }
